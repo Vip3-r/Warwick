@@ -1,0 +1,56 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: -webkit-linear-gradient(45deg, #001a4b, #036243);
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
+
+h1 {
+    font-family: "proxima-nova",sans-serif;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 21px;
+    margin-left: -3px;
+    line-height: 1em;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 8px;
+    text-rendering: optimizeLegibility;
+}
+
+table {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+}
+
+tbody, .full {
+    height: 100%;
+}
+
+.data-table-container {
+    height: calc(100% - 200px);
+    overflow-y: scroll;
+}
+
+table, th, td {
+    border: 1px solid #878787;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+}
+
+p {
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+}

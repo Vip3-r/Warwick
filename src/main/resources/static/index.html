@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>KPI Rankings - Adil Khalifa</title>
+        <link rel="stylesheet" href="/styles.css" />
+        <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="http://localhost:8080/kpi-lookup.js"></script>
+    </head>
+	<body>
+		<table>
+			<tr>
+				<td>
+					<h1>Business in Practice - KPI Rankings</h1>
+				</td>
+			</tr>
+			<tr>
+				<td> <!-- menu -->
+                    <select id="date"></select>
+                    <select id="kpi">
+                        <option selected value="scores">Scores</option>
+                        <option value="wacc">WACC</option>
+                        <option value="factory_utilization">Factory Utilisation</option>
+                        <option value="employee_engagement">Employee Engagement</option>
+                        <option value="interest_coverage">Interest Coverage</option>
+                        <option value="marketing_spend_rev">Cumulative Marketing Spend/Rev</option>
+                        <option value="e_cars_sales">eCar Sales</option>
+                        <option value="co2_penalty">CO2 Penalty</option>
+                    </select>
+				</td>
+            </tr>
+            <tr>
+				<td>
+                    <p class="request-status">Loading, please wait...</p>
+                </td>
+            </tr>
+            <tr>
+				<td class="full"> <!-- data -->
+                    <div class="data-table-container">
+                        <table id="datatable" border="1px">
+                            <thead>
+                                <tr><th>Rank</th><th>Team</th><th>Value</th></tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
