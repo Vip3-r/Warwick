@@ -1,6 +1,7 @@
-package uk.ac.warwick.domain;
+package uk.ac.warwick.model;
 
 import lombok.Data;
+import uk.ac.warwick.domain.KPIRanking;
 
 import java.time.LocalDate;
 

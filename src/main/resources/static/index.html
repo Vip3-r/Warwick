@@ -6,25 +6,36 @@
         <script src="/kpi-lookup.js"></script>
     </head>
 	<body>
-		<table>
+
+        <div class="login">
+            <h2>Login as</h2>
+            <div class="login-options">
+                <div class="login-selection">
+                    <img src="/students.png" />
+                    <button id="student-login">Student</button>
+                </div>
+                <div class="login-selection">
+                    <img src="/teacher.png" />
+                    <button id="academic-login">Academic</button>
+                </div>
+                <div class="login-selection">
+                    <img src="/staff.png" />
+                    <button id="staff-login">Staff</button>
+                </div>
+            </div>
+        </div>
+
+		<table class="kpi-table">
 			<tr>
-				<td>
+				<td class="table-heading">
 					<h1>Business in Practice - KPI Rankings</h1>
-				</td>
+                    <button id="logout">Log out</button>
+                </td>
 			</tr>
 			<tr>
 				<td> <!-- menu -->
                     <select id="date"></select>
-                    <select id="kpi">
-                        <option selected value="scores">Scores</option>
-                        <option value="wacc">WACC</option>
-                        <option value="factory_utilization">Factory Utilisation</option>
-                        <option value="employee_engagement">Employee Engagement</option>
-                        <option value="interest_coverage">Interest Coverage</option>
-                        <option value="marketing_spend_rev">Cumulative Marketing Spend/Rev</option>
-                        <option value="e_cars_sales">eCar Sales</option>
-                        <option value="co2_penalty">CO2 Penalty</option>
-                    </select>
+                    <select id="kpi"></select>
 				</td>
             </tr>
             <tr>

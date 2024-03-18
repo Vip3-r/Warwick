@@ -3,11 +3,13 @@ package uk.ac.warwick.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.DefaultResourceLoader;
-import uk.ac.warwick.domain.KPIDayRankings;
+import uk.ac.warwick.model.KPIDayRankings;
+import uk.ac.warwick.security.AuthorityGroup;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,6 +36,6 @@ class KeyPerformanceIndicatorServiceTest {
         testRanking.setDate(LocalDate.now());
         rankings.add(testRanking);
         keyPerformanceIndicatorService.mapRankings(rankings);
-        assertEquals(1, keyPerformanceIndicatorService.getRankings().size());
+        assertEquals(1, keyPerformanceIndicatorService.getRankings(List.of(AuthorityGroup.STUDENT)).size());
     }
 }

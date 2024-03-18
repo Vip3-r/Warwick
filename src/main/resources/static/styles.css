@@ -27,16 +27,20 @@ h1 {
 
 table {
     width: 80%;
-    height: 100%;
+    height: calc(100% - 50px);
     margin: auto;
 }
 
-tbody, .full {
+tbody {
     height: 100%;
 }
 
+.full {
+    height: 95%;
+}
+
 .data-table-container {
-    height: calc(100% - 200px);
+    height: calc(100% - 100px);
     overflow-y: scroll;
 }
 
@@ -49,8 +53,50 @@ th, td {
     padding: 15px;
 }
 
-p {
+.table-heading {
+    display: inline-flex;
+    width: calc(100% - 30px);
+    justify-content: space-between;
+}
+
+.login h2, p {
     width: 100%;
     text-align: center;
     white-space: nowrap;
+}
+
+.login .login-options {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.login-selection {
+    display: grid;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: -webkit-linear-gradient(45deg, #036243, #001a4b);
+    margin: 20px;
+    width: 200px;
+}
+
+.login-selection img {
+    width: 150px;
+}
+
+button {
+    border: 2px solid black;
+    border-radius: 3px;
+    background: -webkit-linear-gradient(45deg, cyan, #04a7a7);
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-selection button {
+    width: 150px;
+    padding: 20px;
+    margin: 20px 0 20px 0;
 }

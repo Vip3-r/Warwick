@@ -17,28 +17,62 @@
         "co2_penalty" : "M (USD)"
     }
 
+    const LABELS = {
+        "wacc" :  "WACC",
+        "scores" : "Scores",
+        "factory_utilization" : "Factory Utilisation",
+        "employee_engagement" : "Employee Engagement",
+        "interest_coverage" : "Interest Coverage",
+        "marketing_spend_rev" : " Cumulative Marketing Spend",
+        "e_cars_sales" : "eCar Sales",
+        "co2_penalty" : "CO2 Penalty"
+    }
+
     const TEAM_NAMES = ["fovro", "Fastun", "Nyxx", "CarSpa", "Motion", "Worthwheel", "Carzio", "Rollovo", "iAuto", "VroomTime", "Kar", "EliteTechs", "Carz", "MileMode", "Automotiq", "RYDI", "EvolutionAuto", "Automovo", "ROBOH", "rimovo", "ottobi", "Evi", "Rusted", "Cjio", "NitroRide", "HXH", "SpeedLabs", "TenQ", "Caraxa", "Blazers", "DriveSwitch", "GIIQ", "Teuso", "Hoqa", "AutoInfinite", "vusk", "DentCenter", "Turbo", "evCU", "Electronically", "Drivat", "Torque", "Drift", "Carvato", "Rush", "Matic", "Wheelic", "Slidyn", "Pitpo", "caralo", "Drivesly", "Xuad", "CarLeap", "Tazox", "Amxu", "Honkli"];
 
-    const data = new Map();
+    var data = new Map();
+    var accessKey;
 
     const init = () => {
+        const table = $('.kpi-table');
+        table.hide();
+        bindListeners();
+    }
+
+
+    const loadData = () => {
         const statusElement = $('.request-status');
         const dateOptions = $('#date');
-        $.get('/rankings').done((result) => {
-            const sortByDate = result.sort((a, b) => new Date(a.date) - new Date(b.date));
-            dateOptions.empty();
-            sortByDate.forEach((row, index) => {
-                data.set(row.date, row);
-                dateOptions.append(`<option value="${row.date}">Day ${index + 1}</option>`);
-            });
-            dateOptions.val(result[0].date);
-            statusElement.hide();
-            update();
-        }).error(() => {
-            statusElement.text(ERROR_NOT_FOUND);
-            statusElement.show();
+        const metricOptions = $('#kpi');
+
+        $.ajax({
+            url: '/rankings',
+            dataType: 'json',
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            headers: {
+                'Authorization' : `Bearer ${accessKey}`
+            },
+            success: (result) => {
+                const sortByDate = result.sort((a, b) => new Date(a.date) - new Date(b.date));
+                metricOptions.empty();
+                Object.keys(result[0]).filter(key => key !== 'date').forEach(key =>
+                    metricOptions.append(`<option value="${key}">${LABELS[key]}</option>`)
+                );
+                dateOptions.empty();
+                sortByDate.forEach((row, index) => {
+                    data.set(row.date, row);
+                    dateOptions.append(`<option value="${row.date}">Day ${index + 1}</option>`);
+                });
+                dateOptions.val(result[0].date);
+                statusElement.hide();
+                update();
+            },
+            error: () => {
+                statusElement.text(ERROR_NOT_FOUND);
+                statusElement.show();
+            }
         });
-        bindListeners();
     }
 
     const update = () => {
@@ -57,9 +91,33 @@
         });
     }
 
+    const login = (path) => {
+        $.get(path).done((result) => {
+            accessKey = result.token;
+            const login = $('.Login');
+            login.hide();
+            const table = $('.kpi-table');
+            table.show();
+            loadData();
+        })
+    }
+
+    const logout = () => {
+        accessKey = undefined;
+        data = new Map();
+        const table = $('.kpi-table');
+        table.hide();
+        const login = $('.Login');
+        login.show();
+    }
+
     function bindListeners() {
-        $('#date').on('change', (event) => update());
-        $('#kpi').on('change', (event) => update());
+        $('#date').on('change', () => update());
+        $('#kpi').on('change', () => update());
+        $('#student-login').on('click', () => login('/auth/student'));
+        $('#academic-login').on('click', () => login('/auth/academic'));
+        $('#staff-login').on('click', () => login('/auth/staff'));
+        $('#logout').on('click', () => logout());
     }
 
     $(document).ready(() => init());
